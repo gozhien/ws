@@ -1,0 +1,49 @@
+#!/bin/bash
+clear
+slowdns () {
+	echo -e "\033[0;36m#===================================================#\033[m"
+	    echo ""
+	        echo -e "\033[0;36m[01]\033[m | CREATE ACCOUNT"
+		    echo -e "\033[0;36m[02]\033[m | DELETE ACCOUNT"
+		echo -e "\033[0;36m[03]\033[m | INFO ACCOUNT"
+		echo -e "\033[0;36m[04]\033[m | TRIAL"
+		        echo -e "\033[0;36m[00]\033[m | EXIT"
+			    echo ""
+			        echo -ne "\033[0;36mO PILIH YANG MANA?:\0033[m " && read opcao
+				    case $opcao in
+					        1) Opcao1 ;;
+						    2) Opcao2 ;;
+						    3) Opcao3 ;;
+						    4) Opcao4 ;;
+						     0) exit ;;
+							    *) "pilihan tidak ada" ; echo ; slowdns ;;
+							        esac
+								    }
+
+							    Opcao1 () {
+								        clear
+									    new
+								    }
+
+							    Opcao2 () {
+								        clear
+									    hapus
+								    }
+								
+								Opcao3 () {
+								        clear
+									    list
+								    }
+								
+								Opcao4 () {
+								        clear
+									    trial
+								    }
+
+							    Sair() {
+								        clear
+									    exit
+								    }
+							    clear
+							    slowdns
+
