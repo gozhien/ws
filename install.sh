@@ -93,10 +93,11 @@ systemctl start badvpn
 
 echo "=============== INSTALL WS ==============="
 apt install python
+
 wget https://raw.githubusercontent.com/gozhien/ws/main/pd.py
 
 echo "=============== MENJALANKAN SEMUA ==============="
-rm -rf badvpn-master key.pem py.sh cert.pem install.sh master.zip
+rm -rf badvpn-master key.pem cert.pem install.sh master.zip
 screen -dmS pydong python pd.py
 /etc/init.d/dropbear restart
 /etc/init.d/stunnel4 restart
