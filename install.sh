@@ -14,10 +14,6 @@ ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 
 apt update
 
-wget -O /etc/systemd/system/badvpn.service https://gitlab.com/PANCHO7532/scripts-and-random-code/-/raw/master/nfree/badvpn.service && chmod +x /etc/systemd/system/badvpn.service
-systemctl enable badvpn
-systemctl start badvpn
-
 wget -P /usr/bin https://raw.githubusercontent.com/gozhien/ws/main/new && chmod +x /usr/bin/new
 wget -P /usr/bin https://raw.githubusercontent.com/gozhien/ws/main/list && chmod +x /usr/bin/list
 wget -P /usr/bin https://raw.githubusercontent.com/gozhien/ws/main/trial && chmod +x /usr/bin/trial
@@ -42,9 +38,10 @@ connect = 127.0.0.1:9999
 END
 
 echo "=============== INSTALL SERTIFIKAT ==============="
+rm /etc/stunnel/stunnel.pem
 openssl genrsa -out key.pem 2048
 openssl req -new -x509 -key key.pem -out cert.pem -days 1095 \
-		-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
+	-subj "/C=$country/ST=$state/L=$locality/O=$organization/OU=$organizationalunit/CN=$commonname/emailAddress=$email"
 cat key.pem cert.pem >> /etc/stunnel/stunnel.pem
 
 echo "=============== INSTALL DROPBEAR ==============="
@@ -79,19 +76,28 @@ DROPBEAR_RECEIVE_WINDOW=65536
 END
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
-wget https://github.com/gozhien/ws/raw/fas.net
+wget https://raw.githubusercontent.com/gozhien/ws/main/fas.net
+
+echo "=============== SETTING AUTO ==============="
+echo "5 * * * *  sync; echo 3 > /proc/sys/vm/drop_caches" >> /etc/cron.d/cache
+echo "0 0 * * * /sbin/shutdown -r now" >> /etc/cron.d/reboot
+echo "runuser -l root -c 'screen -dmS pydong python pd.py'" >> /etc/rc.local
 
 echo "=============== INSTALL BADVPN ==============="
-apt install unzip cmake make screen && wget https://github.com/ambrop72/badvpn/archive/master.zip && unzip master.zip && cd badvpn-master && mkdir build && cd build && cmake .. -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1 && make install && cd $home
+apt install unzip && apt install cmake && apt install make && apt install screen
+wget https://github.com/ambrop72/badvpn/archive/master.zip && unzip master.zip && cd badvpn-master && mkdir build && cd build && cmake .. -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1 && make install
 
-echo "=============== INSTALL SALOME WS ==============="
-wget -P /usr/local/bin/ https://github.com/gozhien/ws/raw/main/ws-epro && chmod +x /usr/local/bin/ws-epro
-wget https://raw.githubusercontent.com/gozhien/ws/main/config.yml && chmod +x config.yml
+wget -O /etc/systemd/system/badvpn.service https://gitlab.com/PANCHO7532/scripts-and-random-code/-/raw/master/nfree/badvpn.service && chmod +x /etc/systemd/system/badvpn.service
+systemctl enable badvpn
+systemctl start badvpn
+
+echo "=============== INSTALL WS ==============="
+apt install python
+wget https://raw.githubusercontent.com/gozhien/ws/main/pd.py
 
 echo "=============== MENJALANKAN SEMUA ==============="
-screen -AmdS as ws-epro -salome -listen :80 -ssh 127.0.0.1:2222 -default 127.0.0.1:9999 -f config.yml
 rm -rf badvpn-master key.pem py.sh cert.pem install.sh master.zip
-screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 250 --max-connections-for-client 3
+screen -dmS pydong python pd.py
 /etc/init.d/dropbear restart
 /etc/init.d/stunnel4 restart
 clear
