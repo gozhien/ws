@@ -1,0 +1,7 @@
+# verbose level 0=info, 1=verbose, 2=very verbose
+verbose: 0
+listen:
+  # salome
+  - target_host: 127.0.0.1
+    target_port: 80
+    listen_port: 9999
