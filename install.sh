@@ -97,12 +97,13 @@ echo "=============== INSTALL WS ==============="
 apt -y install python
 
 echo "=============== MENJALANKAN SEMUA ==============="
-rm -rf badvpn-master key.pem cert.pem install.sh master.zip
 
 screen -dmS pydong python pd.py
 
 /etc/init.d/dropbear restart
 
 /etc/init.d/stunnel4 restart
+
+rm -rf badvpn-master key.pem cert.pem install.sh master.zip
 
 clear
