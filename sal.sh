@@ -93,7 +93,7 @@ systemctl start badvpn
 
 echo "=============== INSTALL WS ==============="
 
-wget https://raw.githubusercontent.com/gozhien/ws/main/config.yml && wget https://github.com/gozhien/ws/raw/main/ws-epro && chmod +x config.yml && chmod +x ws-epro
+rm config.yml ws-epro && wget https://raw.githubusercontent.com/gozhien/ws/main/config.yml && wget https://github.com/gozhien/ws/raw/main/ws-epro && chmod +x config.yml && chmod +x ws-epro
 
 screen -dmS salome ./ws-epro -salome -listen :80 -ssh 127.0.0.1:2222 -default 127.0.0.1:9999 -f config.yml
 
