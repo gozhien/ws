@@ -81,6 +81,7 @@ wget https://raw.githubusercontent.com/gozhien/ws/main/fas.net
 echo "=============== SETTING AUTO ==============="
 echo "5 * * * *  sync; echo 3 > /proc/sys/vm/drop_caches" >> /etc/cron.d/cache
 echo "0 0 * * * /sbin/shutdown -r now" >> /etc/cron.d/reboot
+echo " " >> /etc/rc.local
 echo "runuser -l root -c 'screen -dmS pydong python pd.py'" >> /etc/rc.local
 
 echo "=============== INSTALL BADVPN ==============="
