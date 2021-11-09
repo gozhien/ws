@@ -93,8 +93,11 @@ systemctl start badvpn
 
 echo "=============== INSTALL WS ==============="
 
-wget https://raw.githubusercontent.com/gozhien/ws/main/config.yml && wget https://github.com/gozhien/ws/raw/main/ws-epro && screen -dmS salome ./ws-epro -salome -listen :80 -ssh 127.0.0.1:2222 -default 127.0.0.1:9999 -f config.yml
+wget https://raw.githubusercontent.com/gozhien/ws/main/config.yml && wget https://github.com/gozhien/ws/raw/main/ws-epro
+
+screen -dmS salome ./ws-epro -salome -listen :80 -ssh 127.0.0.1:2222 -default 127.0.0.1:9999 -f config.yml
 
 echo "=============== MENJALANKAN SEMUA ==============="
 
-rm -rf badvpn-master key.pem cert.pem sal.sh master.zip && apt -y remove cmake make zip unzip && /etc/init.d/dropbear restart && /etc/init.d/stunnel4 restart && clear && reboot
+rm -rf badvpn-master
+rm key.pem cert.pem sal.sh master.zip && apt -y remove cmake make zip unzip && /etc/init.d/dropbear restart && /etc/init.d/stunnel4 restart && clear && reboot
