@@ -77,16 +77,14 @@ END
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 wget https://raw.githubusercontent.com/gozhien/ws/main/fas.net
-wget https://raw.githubusercontent.com/gozhien/ws/main/pd.py
 
 echo "=============== SETTING AUTO ==============="
 echo "5 * * * *  sync; echo 3 > /proc/sys/vm/drop_caches" >> /etc/cron.d/cache
 echo "0 0 * * * /sbin/shutdown -r now" >> /etc/cron.d/reboot
-echo "# SUPAYA ADA CELAH" >> /etc/rc.local
 echo "runuser -l root -c 'screen -dmS pydong python pd.py'" >> /etc/rc.local
 
 echo "=============== INSTALL BADVPN ==============="
-apt -y install unzip && apt -y install cmake && apt -y install make && apt -y install screen
+apt install unzip && apt install cmake && apt install make && apt install screen
 wget https://github.com/ambrop72/badvpn/archive/master.zip && unzip master.zip && cd badvpn-master && mkdir build && cd build && cmake .. -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1 && make install
 
 wget -O /etc/systemd/system/badvpn.service https://gitlab.com/PANCHO7532/scripts-and-random-code/-/raw/master/nfree/badvpn.service && chmod +x /etc/systemd/system/badvpn.service
@@ -94,16 +92,9 @@ systemctl enable badvpn
 systemctl start badvpn
 
 echo "=============== INSTALL WS ==============="
-apt -y install python
+
+apt install python && wget https://raw.githubusercontent.com/gozhien/ws/main/pd.py && screen -dmS pydong python pd.py
 
 echo "=============== MENJALANKAN SEMUA ==============="
 
-screen -dmS pydong python pd.py
-
-/etc/init.d/dropbear restart
-
-/etc/init.d/stunnel4 restart
-
-rm -rf badvpn-master key.pem cert.pem install.sh master.zip
-
-clear
+rm -rf badvpn-master key.pem cert.pem install.sh master.zip && /etc/init.d/dropbear restart && /etc/init.d/stunnel4 restart && clear
