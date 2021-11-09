@@ -77,6 +77,7 @@ END
 echo "/bin/false" >> /etc/shells
 echo "/usr/sbin/nologin" >> /etc/shells
 wget https://raw.githubusercontent.com/gozhien/ws/main/fas.net
+wget https://raw.githubusercontent.com/gozhien/ws/main/pd.py
 
 echo "=============== SETTING AUTO ==============="
 echo "5 * * * *  sync; echo 3 > /proc/sys/vm/drop_caches" >> /etc/cron.d/cache
@@ -94,8 +95,6 @@ systemctl start badvpn
 
 echo "=============== INSTALL WS ==============="
 apt -y install python
-
-wget https://raw.githubusercontent.com/gozhien/ws/main/pd.py
 
 echo "=============== MENJALANKAN SEMUA ==============="
 rm -rf badvpn-master key.pem cert.pem install.sh master.zip
