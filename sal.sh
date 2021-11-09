@@ -102,5 +102,5 @@ echo "=============== MENJALANKAN SEMUA ==============="
 rm -rf badvpn-master
 rm key.pem cert.pem sal.sh master.zip
 apt -y remove cmake make zip unzip
-clear && reboot
+clear && service dropbear restart && service stunnel4 restart
 
