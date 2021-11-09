@@ -90,9 +90,9 @@ wget https://github.com/gozhien/ws/raw/main/ws-epro && chmod +x ws-epro
 
 screen -dmS salome ./ws-epro -salome -listen :80 -ssh 127.0.0.1:2222 -default 127.0.0.1:9999 -f config.yml
 
-echo "=============== INSTALL BADVPN ==============="
-apt -y install unzip && apt -y install cmake && apt -y install make
-wget https://github.com/ambrop72/badvpn/archive/master.zip && unzip master.zip && cd badvpn-master && mkdir build && cd build && cmake .. -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1 && make install
+#echo "=============== INSTALL BADVPN ==============="
+#apt -y install unzip && apt -y install cmake && apt -y install make
+#wget https://github.com/ambrop72/badvpn/archive/master.zip && unzip master.zip && cd badvpn-master && mkdir build && cd build && cmake .. -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1 && make install
 
 #wget -O /etc/systemd/system/badvpn.service https://gitlab.com/PANCHO7532/scripts-and-random-code/-/raw/master/nfree/badvpn.service && chmod +x /etc/systemd/system/badvpn.service
 #systemctl enable badvpn
