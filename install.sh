@@ -90,6 +90,7 @@ wget https://github.com/ambrop72/badvpn/archive/master.zip && unzip master.zip &
 wget -O /etc/systemd/system/badvpn.service https://gitlab.com/PANCHO7532/scripts-and-random-code/-/raw/master/nfree/badvpn.service && chmod +x /etc/systemd/system/badvpn.service
 systemctl enable badvpn
 systemctl start badvpn
+cd $home
 
 echo "=============== INSTALL WS ==============="
 
