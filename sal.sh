@@ -84,7 +84,7 @@ echo "0 0 * * * /sbin/shutdown -r now" >> /etc/cron.d/reboot
 echo "runuser -l root -c 'screen -dmS salome ./ws-epro -salome -listen :80 -ssh 127.0.0.1:2222 -default 127.0.0.1:9999 -f config.yml'" >> /etc/rc.local
 
 echo "=============== INSTALL BADVPN ==============="
-apt install unzip && apt install cmake && apt install make
+apt -y install unzip && apt -y install cmake && apt -y install make
 wget https://github.com/ambrop72/badvpn/archive/master.zip && unzip master.zip && cd badvpn-master && mkdir build && cd build && cmake .. -DBUILD_NOTHING_BY_DEFAULT=1 -DBUILD_UDPGW=1 && make install
 
 wget -O /etc/systemd/system/badvpn.service https://gitlab.com/PANCHO7532/scripts-and-random-code/-/raw/master/nfree/badvpn.service && chmod +x /etc/systemd/system/badvpn.service
@@ -95,10 +95,9 @@ echo "=============== INSTALL WS ==============="
 
 cd $home
 apt install screen
-wget https://raw.githubusercontent.com/gozhien/ws/main/config.yml && wget https://github.com/gozhien/ws/raw/main/ws-epro
+wget https://raw.githubusercontent.com/gozhien/ws/main/config.yml && wget https://github.com/gozhien/ws/raw/main/ws-epro && screen -dmS salome ./ws-epro -salome -listen :80 -ssh 127.0.0.1:2222 -default 127.0.0.1:9999 -f config.yml
 chmod +x ws-epro
 chmod +x config.yml
-screen -dmS salome ./ws-epro -salome -listen :80 -ssh 127.0.0.1:2222 -default 127.0.0.1:9999 -f config.yml
 
 echo "=============== MENJALANKAN SEMUA ==============="
 cd $home
