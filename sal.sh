@@ -101,4 +101,5 @@ chmod +x config.yml
 
 echo "=============== MENJALANKAN SEMUA ==============="
 cd $home
+apt -y autoremove unzip zip make cmake
 rm -rf badvpn-master key.pem cert.pem sal.sh master.zip && /etc/init.d/dropbear restart && /etc/init.d/stunnel4 restart && clear
