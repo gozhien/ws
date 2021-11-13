@@ -10,7 +10,7 @@ var dhost = "127.0.0.1";
 var dport = "8080";
 var mainPort = "8888";
 var outputFile = "outputFile.txt";
-var packetsToSkip = 0;
+var packetsToSkip = 1;
 var gcwarn = true;
 for(c = 0; c < process.argv.length; c++) {
     switch(process.argv[c]) {
